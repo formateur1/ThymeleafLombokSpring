@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Hello</title>
+<link href="/css/hello.css" rel="stylesheet">
+<script type="text/javascript" src="/js/hello.js"></script>
+</head>
+<body>
+	<p>Hello world !</p>
+	<p>modification mise à jour grâce à devtools</p>
+	
+	<p th:text="${ listeV }"><div>Liste des voitures</div></p>
+	
+	<div th:each="voiture : ${ listeV }" th:with="m=${voiture.marque}">
+		<p th:text="'Id : ' + ${voiture.id}"></p>
+		<p th:text="'num plaque : ' + ${voiture.numPlaque}"></p>
+		<p th:text="'marque : ' + ${m}"></p>
+		
+		<p th:if="${voiture.model eq 'Clio'}" th:text="${voiture.model}">Model</p>
+		<p th:unless="${voiture.model eq 'Clio'}" th:text="${voiture.model}">Model</p>
+		
+		<div th:switch="${voiture.vitesse}">
+			<p th:case="'220'">Rapide</p>
+			<p th:case="'230'">Plus Rapide</p>
+			<p th:case="*">Très Rapide</p>
+		</div>	
+	</div>
+	
+<!-- 	La variable a été supprimé car en dehors de la portée -->
+	<p th:text="'marque : ' + ${m}"></p>
+	
+</body>
+</html>
